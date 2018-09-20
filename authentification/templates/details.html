@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/bootstrap.min.css' %}">
+
+</head>
+<body>
+<table class="table table-striped">
+
+         <thead>
+                 <tr>
+                 <td>First Name</td>
+                 <td>Last Name</td>
+                 <td>Email</td>
+                 </tr>
+         </thead>
+         <tbody>
+
+                 <tr>
+                 <td>{{ user.first_name }}</td>
+                 <td>{{ user.last_name }}</td>
+                     <td id="userID">{{ user.email}}</td>
+                 </tr>
+
+        </tbody>
+</table>
+</table>
+
+
+ <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change your information</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h4 class="modal-title">Would you change your email</h4>
+        </div>
+
+           <form class="form-signin" method="post" id="form">
+                    {% csrf_token %}
+                <input id="emailID" name="email" type="email" class="form-control" placeholder="Email" required  autofocus>
+
+
+
+               <div class="modal-footer">
+
+                   <button name="register" class="btn btn-lg btn-primary btn-block" type="submit" >Enter</button>
+
+        </div>
+
+
+                </label>
+
+                </form>
+      </div>
+    </div>
+  </div>
+<a href="{% url 'index' %}">Logout</a>
+
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).on('submit',"#form",function(e)
+{
+    e.preventDefault();
+
+    $.ajax({
+        type:'Post',
+        url:'/details',
+        data:{
+            email:$('#emailID').val(),
+            csrfmiddlewaretoken:'{{ csrf_token }}'
+        },
+        success:function(){
+            $('#myModal').modal('toggle');
+            $('#userID').html($('#emailID').val());
+
+
+        }
+    })
+
+
+
+}
+)
+
+</script>
+</html>
