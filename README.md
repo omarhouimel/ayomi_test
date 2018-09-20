@@ -14,14 +14,14 @@ $ source venv/bin/activate
 > ~$ pip install -r requirements.txt
 
  2-migrate the data base
-> ~$ ./manage.py migrate
+> ~$ python manage.py migrate
 
  3-Run
-> ~$ ./manage.py runserver
+> ~$ python manage.py runserver
 
 
 PS: To run Test you have to copy geckodriver in your /usr/local/bin if you are using Linux 
 run test with firefox
-> ~$ ./manage.py test
+> ~$ python manage.py test
 
 
